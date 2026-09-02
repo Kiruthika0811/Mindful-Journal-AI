@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "User profile image URL" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["uid"]
+    },
+    "JournalEntry": {
+      "title": "JournalEntry",
+      "description": "Individual reflective journal entry with multi-turn AI conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique entry ID" },
+        "userId": { "type": "string", "description": "User ID owning this entry" },
+        "title": { "type": "string", "description": "Title of the entry" },
+        "content": { "type": "string", "description": "Written or dictated reflection content" },
+        "mood": { "type": "string", "description": "Mood emoji indicator" },
+        "tags": { "type": "array", "description": "Custom reflection tags" },
+        "date": { "type": "string", "description": "Creation date formatted as YYYY-MM-DD" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" },
+        "summary": { "type": "string", "description": "AI-generated concise summary" },
+        "themes": { "type": "array", "description": "Extracted key themes" },
+        "actionableTakeaway": { "type": "string", "description": "Practical takeaway or affirmation" },
+        "sentiment": { "type": "string", "description": "Detected sentiment label" },
+        "conversation": { "type": "array", "description": "Multi-turn chat dialogue with Gemini" }
+      },
+      "required": ["id", "userId", "content", "createdAt"]
+    },
+    "WeeklyDigest": {
+      "title": "WeeklyDigest",
+      "description": "Synthesized weekly AI digest and growth insights",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique digest ID" },
+        "userId": { "type": "string", "description": "User ID owning this digest" },
+        "weekRange": { "type": "string", "description": "Date range string" },
+        "headline": { "type": "string", "description": "Empowering headline" },
+        "overview": { "type": "string", "description": "Holistic weekly narrative" },
+        "topThemes": { "type": "array", "description": "Dominant reflection themes" },
+        "moodTrends": { "type": "string", "description": "Emotional trajectory description" },
+        "celebrations": { "type": "array", "description": "List of victories and positive moments" },
+        "mindfulInquiryForNextWeek": { "type": "array", "description": "Guiding questions for the coming week" },
+        "recommendedFocus": { "type": "string", "description": "Mindful habit or grounding focus" },
+        "generatedAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "userId", "headline", "overview", "generatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User root document"
+    },
+    "/users/{userId}/entries/{entryId}": {
+      "schema": "JournalEntry",
+      "description": "User-isolated journal entries"
+    },
+    "/users/{userId}/digests/{digestId}": {
+      "schema": "WeeklyDigest",
+      "description": "User-isolated weekly AI digests"
+    }
+  }
+}

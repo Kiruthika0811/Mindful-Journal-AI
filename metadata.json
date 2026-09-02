@@ -1,0 +1,6 @@
+{
+  "name": "Mindful Journal AI",
+  "description": "A secure, user-authenticated journaling app with multi-turn Gemini reflections, voice-to-text, mood tagging, Firestore persistence, and weekly AI digests.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
